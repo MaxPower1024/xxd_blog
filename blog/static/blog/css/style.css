@@ -1058,9 +1058,8 @@ aside.comments .comment header .meta a {
 
 aside.comments .comment .body {
   margin-top: 10px;
-  margin-left: 100px;
   border: 1px solid #ddd;
-  padding: 20px;
+  padding: 8px;
 }
 
 /* ===========
