@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.six import python_2_unicode_compatible
-
+from django.urls import reverse
 # 分类
 @python_2_unicode_compatible
 class Category(models.Model):
@@ -36,5 +36,8 @@ class Post(models.Model):
     # 自己的blog，不用创建作者模型
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse('blog:detail',kwargs={'pk':self.pk})
     
     

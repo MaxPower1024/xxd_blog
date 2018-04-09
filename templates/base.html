@@ -1,10 +1,174 @@
+{% load staticfiles %}
+{% load blog_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>hhel</title>
+    <meta charset="utf-8">
+    <title>jeshmin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/font-awesome/css/font-awesome.min.css' %}">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600|PT+Serif:400,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}" id="theme-styles">
+    <script src="{% static 'blog/js/vendor/google/html5-3.6-respond-1.1.0.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'blog/css/highlights/github.css' %}">
+
 </head>
 <body>
+<header>
+    <div class="widewrapper masthead">
+        <div class="container">
+            <a href="index.html" id="logo">
+                <img src="{% static 'blog/img/logo.png' %}" alt="clean Blog">
+            </a>
+            <div class="clean-searchbox">
+                <input class="searchfield" id="searchbox" type="text" placeholder="Search">
+                <button class="searchbutton" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+            <nav>
+                <div class="nav">
+                    <ul class="nav nav-pills navbar-nav">
+
+                        <li>
+                            <a href="index.html">首页</a>
+                        </li>
+                        <li>
+                            <a href="about.html">关于</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">联系</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="widewrapper subheader">
+        <div class="container">
+            {% block top %}
+            {% endblock top %}
+            <div class="clean-breadcrumb">
+                <a href="#">Blog</a>
+
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="widewrapper main">
+    <div class="container">
+        <div class="row">
+            <aside class="col-md-4 blog-aside">
+                {% block toc %}
+                {% endblock toc %}
+                <div class="aside-widget">
+                    <header>
+                        <h3>最新文章！</h3>
+                        {% get_recent_posts as recent_post_list %}
+                    </header>
+                    <div class="body">
+                        <ul class="clean-list">
+                            {% for post in recent_post_list %}
+                            <li>
+                                <a href ="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                            </li>
+                            {% empty %}
+                            暂无文章!
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="aside-widget">
+                    <header>
+                        <h3>分类</h3>
+                        {% get_categories as category_list %}
+                    </header>
+                    <div class="body">
+                        <ul class="clean-list">
+                            {% for category in category_list %}
+                                <li>
+                                    <a href="{% url 'blog:category' category.pk %}">{{ category.name }} <span class="post-count">(111)</span></a>
+                                </li>
+
+                            {% empty %}
+                                暂无分类！
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="aside-widget">
+                    <header>
+                        <h3>标签</h3>
+                    </header>
+                    <div class="body clearfix">
+                        <ul class="tags">
+                            <li><a href="#">HTML5</a></li>
+                            <li><a href="#">blog</a></li>
+                            <li><a href="#">百度云</a></li>
+                            <li><a href="#">TEMPLATE</a></li>
+                            <li><a href="#">PLUGIN</a></li>
+                            <li><a href="#">BOOTSTRAP</a></li>
+                            <li><a href="#">TUTORIAL</a></li>
+                            <li><a href="#">UI/UX</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="col-md-8 blog-main">
+                {% block main %}
+                {% endblock main %}
+            </main>
+            <aside class="col-md-4">
+
+            </aside>
+
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="widewrapper footer">
+        <div class="container">
+
+            <div class="row" style="display: flex;
+                justify-content: space-between">
+                <div class="footer-widget">
+                    <h3><i class="fa fa-user"></i>关于我</h3>
+
+                    <p>我的经验介绍</p>
+
+                </div>
+
+                <div class="footer-widget">
+                    <h3><i class="fa fa-envelope"></i>联系我</h3>
+
+                    <p>我的联系方式</p>
+
+                    <div class="footer-widget-icon">
+                        <i class="fa fa-facebook"></i><i class="fa fa-twitter"></i><i class="fa fa-google"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="widewrapper copyright">
+        Copyright 2015 More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect
+        from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+    </div>
+</footer>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'blog/js/modernizr.js' %}"></script>
 
 </body>
 </html>

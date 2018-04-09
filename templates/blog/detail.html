@@ -1,10 +1,160 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block top %}
+    <div class="clean-breadcrumb">
+        <a href="#">Blog</a>
+        <span class="separator">&#x2F;</span>
+        <a href="#">Bootstrap</a>
+        <span class="separator">&#x2F;</span>
+        <a href="#">HTML Template</a>
+    </div>
+{% endblock top %}
+
+{% block main %}
+    <article class=" blog-teaser">
+            <header>
+                <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                <div class="entry-meta">
+                    <span class="post-category"><a href="#">{{ post.category.name }}</a></span>
+                    <span class="post-date"><a href="#"><time class="entry-date"
+                                                                              datetime="{{ post.created_time }}">{{ post.created_time }}</time></a></span>
+                    <span class="comments-link"><a href="#">4 评论</a></span>
+                    <span class="views-count"><a href="#">588 阅读</a></span>
+                </div>
+            </header>
+            <div class="body">
+                {{ post.body|safe }}
+            </div>
+    </article>
+    <div class="widewrapper main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 blog-main">
+
+                    <aside class="comments" id="comments">
+                        <hr>
+
+                        <h2><i class="fa fa-comments"></i> 6 Comments</h2>
+
+                        <article class="comment">
+                            <header class="clearfix">
+                                <div class="meta">
+                                    <h3><a href="#">John Doe</a></h3>
+                                    <span class="date">
+                                        24 August 2015
+                                    </span>
+                                    <span class="separator">
+                                        -
+                                    </span>
+
+                                    <a href="#create-comment" class="reply-link">Reply</a>
+                                </div>
+                            </header>
+                             <div class="body">
+                                 评论
+                            </div>
+                        </article>
+
+                        <article class="comment reply">
+                            <header class="clearfix">
+                                <div class="meta">
+                                    <h3><a href="#">John Doe</a></h3>
+                                    <span class="date">
+                                        24 August 2015
+                                    </span>
+                                    <span class="separator">
+                                        -
+                                    </span>
+
+                                    <a href="#create-comment" class="reply-link">Reply</a>
+                                </div>
+                            </header>
+                             <div class="body">
+                               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere sit perspiciatis debitis, vel ducimus praesentium expedita, assumenda ipsum cum corrupti dolorum modi. Rem ipsam similique sapiente obcaecati tenetur beatae voluptatibus.
+                            </div>
+                        </article>
+
+                        <article class="comment ">
+                            <header class="clearfix">
+                                <div class="meta">
+                                    <h3><a href="#">John Doe</a></h3>
+                                    <span class="date">
+                                        24 August 2015
+                                    </span>
+                                    <span class="separator">
+                                        -
+                                    </span>
+
+                                    <a href="#create-comment" class="reply-link">Reply</a>
+                                </div>
+                            </header>
+                             <div class="body">
+                               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere sit perspiciatis debitis, vel ducimus praesentium expedita, assumenda ipsum cum corrupti dolorum modi. Rem ipsam similique sapiente obcaecati tenetur beatae voluptatibus.
+                            </div>
+                        </article>
+
+                        <article class="comment">
+                            <header class="clearfix">
+                                <div class="meta">
+                                    <h3><a href="#">John Doe</a></h3>
+                                    <span class="date">
+                                        24 August 2015
+                                    </span>
+                                    <span class="separator">
+                                        -
+                                    </span>
+
+                                    <a href="#create-comment" class="reply-link">Reply</a>
+                                </div>
+                            </header>
+                             <div class="body">
+                               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere sit perspiciatis debitis, vel ducimus praesentium expedita, assumenda ipsum cum corrupti dolorum modi. Rem ipsam similique sapiente obcaecati tenetur beatae voluptatibus.
+                            </div>
+                        </article>
+                    </aside>
+
+                    <aside class="create-comment" id="create-comment">
+                        <hr>
+
+                        <h2><i class="fa fa-pencil"></i> Add Comment</h2>
+
+                        <form action="#" method="get" accept-charset="utf-8">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="name" id="comment-name" placeholder="Your Name" class="form-control input-lg">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" name="email" id="comment-email" placeholder="Email" class="form-control input-lg">
+                                </div>
+                            </div>
+
+                            <input type="url" name="name" id="comment-url" placeholder="Website" class="form-control input-lg">
+
+                            <textarea rows="10" name="message" id="comment-body" placeholder="Your Message" class="form-control input-lg"></textarea>
+
+                            <div class="buttons clearfix">
+                                <button type="submit" class="btn btn-xlarge btn-clean-one">Submit</button>
+                            </div>
+                        </form>
+                    </aside>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock main %}
+{% block toc %}
+    <div class="aside-widget">
+        <header>
+            <h3>目录</h3>
+        </header>
+        <div class="body">
+            <ul class="clean-list">
+                <li><a href="">教程特点</a></li>
+                <li><a href="">谁适合这个教程</a></li>
+                <li><a href="">在线预览</a></li>
+                <li><a href="">获取帮助</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock toc %}

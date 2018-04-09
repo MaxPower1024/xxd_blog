@@ -526,6 +526,7 @@ The list with special bullet points, used both on blog widgets as well as in the
 Footer widgets 
 ============== */
 .footer-widget {
+  width: 500px;
   margin-top: 25px;
   margin-bottom: 50px;
   line-height: 23px;
