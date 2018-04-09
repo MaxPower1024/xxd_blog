@@ -118,17 +118,21 @@
 
                         <h2><i class="fa fa-pencil"></i> Add Comment</h2>
 
-                        <form action="#" method="get" accept-charset="utf-8">
+                        <form action="{% url 'comments:post_comment' post.pk %}" method="post" accept-charset="utf-8" class="comment-form">
+                            {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-6">
                                     <input type="text" name="name" id="comment-name" placeholder="Your Name" class="form-control input-lg">
+                                    {{ form.name }}
+                                    {{ form.name.errors }}
                                 </div>
                                 <div class="col-md-6">
                                     <input type="email" name="email" id="comment-email" placeholder="Email" class="form-control input-lg">
+                                    {{ form.email }}
+                                    {{ form.email.errors }}
                                 </div>
                             </div>
 
-                            <input type="url" name="name" id="comment-url" placeholder="Website" class="form-control input-lg">
 
                             <textarea rows="10" name="message" id="comment-body" placeholder="Your Message" class="form-control input-lg"></textarea>
 
