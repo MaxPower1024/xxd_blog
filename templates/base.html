@@ -5,6 +5,12 @@
 <head>
     <meta charset="utf-8">
     <title>jeshmin</title>
+
+    <style>
+        span.highlighted {
+            color: red;
+        }
+    </style>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -24,29 +30,43 @@
                 <img src="{% static 'blog/img/logo.png' %}" alt="clean Blog">
             </a>
             <div class="clean-searchbox">
-                <input class="searchfield" id="searchbox" type="text" placeholder="Search">
-                <button class="searchbutton" type="submit">
-                    <i class="fa fa-search"></i>
-                </button>
+{#                <input class="searchfield" id="searchbox" type="search" name="q" placeholder="Search" action="{% url 'haystack_search' %}" >#}
+{#                <button class="searchbutton" type="submit">#}
+{#                    <i class="fa fa-search"></i>#}
+{#                </button>#}
+
+                <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
+                <input type="search" name="q" placeholder="search" required>
+                <button type="submit"><span class="fa fa-search"></span></button>
+            </form>
+
             </div>
+{#            <form role="search" method="get" id="searchbox" action="{% url 'haystack_search' %}">#}
+{#                <input type="search" name="q" placeholder="搜索" required>#}
+{#                <button type="submit"><span class="ion-ios-search-strong"></span></button>#}
+{#            </form>#}
+
             <nav>
                 <div class="nav">
                     <ul class="nav nav-pills navbar-nav">
-
                         <li>
                             <a href="{% url 'blog:index' %}">首页</a>
                         </li>
                         <li>
-                            <a href="about.html">关于</a>
+                            <a href="#">文章</a>
                         </li>
                         <li>
-                            <a href="contact.html">联系</a>
+                            <a href="#">赞助</a>
+                        </li>
+                        <li>
+                            <a href="#">联系</a>
                         </li>
                     </ul>
                 </div>
             </nav>
         </div>
     </div>
+
 
 </header>
 
@@ -83,7 +103,7 @@
                         <ul class="clean-list">
                             {% for category in category_list %}
                                 <li>
-                                    <a href="{% url 'blog:category' category.pk %}">{{ category.name }} <span class="post-count">(111)</span></a>
+                                    <a href="{% url 'blog:category' category.pk %}">{{ category.name }}<span class="post-count">({{ category.num_posts }})</span></a>
                                 </li>
 
                             {% empty %}
@@ -96,17 +116,17 @@
                 <div class="aside-widget">
                     <header>
                         <h3>标签</h3>
+                        {% get_tags as tag_list %}
                     </header>
                     <div class="body clearfix">
                         <ul class="tags">
-                            <li><a href="#">HTML5</a></li>
-                            <li><a href="#">blog</a></li>
-                            <li><a href="#">百度云</a></li>
-                            <li><a href="#">TEMPLATE</a></li>
-                            <li><a href="#">PLUGIN</a></li>
-                            <li><a href="#">BOOTSTRAP</a></li>
-                            <li><a href="#">TUTORIAL</a></li>
-                            <li><a href="#">UI/UX</a></li>
+                            {% for tag in tag_list %}
+                                <li>
+                                <a href="{% url 'blog:tag' tag.pk %}">{{ tag.name }}({{ tag.num_posts }})</a>
+                                </li>
+                                {% empty %}
+                                暂无标签！
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>

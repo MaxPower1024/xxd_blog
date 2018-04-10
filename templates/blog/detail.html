@@ -5,9 +5,14 @@
         <header>
             <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
             <div class="entry-meta">
-                <span class="post-category"><a href="#">{{ post.category.name }} ·</a></span>
-                <span class="post-date"><a href="#"><time class="entry-date"
-                                                          datetime="{{ post.created_time }}">{{ post.created_time }} ·</time></a></span>
+
+                <span class="post-date">
+                    <a href="#">
+                        <time class="entry-date" datetime="{{ post.created_time }}">{{ post.created_time }} ·</time>
+                    </a>
+                </span>
+                <span class="post-category"><a href="#">分类:{{ post.category.name }} ·</a></span>
+                <span class="post-tag"><a href="#">标签:{{ tags.name }} ·</a></span>
                 <span class="comments-link"><a href="#">{{ post.comment_set.count }} 评论 ·</a></span>
                 <span class="views-count"><a href="#">{{ post.views }} 阅读</a></span>
             </div>
@@ -81,10 +86,7 @@
         </header>
         <div class="body">
             <ul class="clean-list">
-                <li><a href="">教程特点</a></li>
-                <li><a href="">谁适合这个教程</a></li>
-                <li><a href="">在线预览</a></li>
-                <li><a href="">获取帮助</a></li>
+                {{ post.toc|safe }}
             </ul>
         </div>
     </div>
