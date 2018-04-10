@@ -20,7 +20,7 @@
 <header>
     <div class="widewrapper masthead">
         <div class="container">
-            <a href="index.html" id="logo">
+            <a href="{% url 'blog:index' %}" id="logo">
                 <img src="{% static 'blog/img/logo.png' %}" alt="clean Blog">
             </a>
             <div class="clean-searchbox">
@@ -34,7 +34,7 @@
                     <ul class="nav nav-pills navbar-nav">
 
                         <li>
-                            <a href="index.html">首页</a>
+                            <a href="{% url 'blog:index' %}">首页</a>
                         </li>
                         <li>
                             <a href="about.html">关于</a>
@@ -48,16 +48,6 @@
         </div>
     </div>
 
-    <div class="widewrapper subheader">
-        <div class="container">
-            {% block top %}
-            {% endblock top %}
-            <div class="clean-breadcrumb">
-                <a href="#">Blog</a>
-
-            </div>
-        </div>
-    </div>
 </header>
 
 <div class="widewrapper main">

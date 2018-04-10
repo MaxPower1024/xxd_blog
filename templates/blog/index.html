@@ -7,15 +7,15 @@
         <header>
             <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
             <div class="entry-meta">
-                <span class="post-category"><a href="#">{{ post.category.name }}</a></span>
+                <span class="post-category"><a href="#">{{ post.category.name }} ·</a></span>
                 <span class="post-date"><a href="#"><time class="entry-date"
-                                                          datetime="{{ post.created_time }}">{{ post.created_time }}</time></a></span>
-                <span class="comments-link"><a href="#">4 评论</a></span>
-                <span class="views-count"><a href="#">588 阅读</a></span>
+                                                          datetime="{{ post.created_time }}">{{ post.created_time }} ·</time></a></span>
+                <span class="comments-link"><a href="#">{{ post.comment_set.count }}评论 ·</a></span>
+                <span class="views-count"><a href="#">{{ post.views }} 阅读</a></span>
             </div>
         </header>
         <div class="body">
-            正文
+            {{ post.body|truncatechars:54 }}
         </div>
         <div class="clearfix">
             <a href="{{ post.get_absolute_url }}" class="btn btn-clean-one">Read more</a>

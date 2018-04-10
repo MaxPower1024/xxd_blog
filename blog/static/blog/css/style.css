@@ -1068,6 +1068,7 @@ Add commment form
 .create-comment input,
 .contact-form input,
 .create-comment textarea,
+
 .contact-form textarea {
   margin-top: 15px;
   border-radius: 0px !important;
