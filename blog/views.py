@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Category,Tag
+from .models import Post, Category, Tag
 import markdown
 from comments.forms import CommentForm
 from django.views.generic import ListView, DeleteView
 from markdown.extensions.toc import TocExtension
 from django.utils.text import slugify
+
 
 class IndexView(ListView):
     model = Post
@@ -63,6 +64,5 @@ class TagView(ListView):
     context_object_name = 'post_list'
     
     def get_queryset(self):
-        tag = get_object_or_404(Tag,pk=self.kwargs.get('pk'))
-        return super(TagView,self).get_queryset().filter(tags=tag)
-    
+        tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
+        return super(TagView, self).get_queryset().filter(tags=tag)

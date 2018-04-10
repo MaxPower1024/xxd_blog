@@ -36,9 +36,11 @@
 {#                </button>#}
 
                 <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
-                <input type="search" name="q" placeholder="search" required>
-                <button type="submit"><span class="fa fa-search"></span></button>
-            </form>
+                    <input type="search" name="q" placeholder="search" required>
+                    <button type="submit">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </form>
 
             </div>
 {#            <form role="search" method="get" id="searchbox" action="{% url 'haystack_search' %}">#}
@@ -78,7 +80,7 @@
                 {% endblock toc %}
                 <div class="aside-widget">
                     <header>
-                        <h3>最新文章！</h3>
+                        <h3>最新文章</h3>
                         {% get_recent_posts as recent_post_list %}
                     </header>
                     <div class="body">

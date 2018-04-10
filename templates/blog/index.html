@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load blog_tags %}
 
 {% block main %}
 {% for post in post_list %}
@@ -10,12 +10,18 @@
 
                 <span class="post-date">
                     <a href="#">
-                        <time class="entry-date" datetime="{{ post.created_time }}">{{ post.created_time }} ·</time>
+                        <time class="entry-date" datetime="{{ post.created_time }}">{{ post.created_time }}    ·</time>
                     </a>
                 </span>
-                <span class="post-category"><a href="#">分类:{{ post.category.name }} ·</a></span>
-                <span class="post-category"><a href="#">标签:{{ tag.name }} ·</a></span>
-                <span class="comments-link"><a href="#">{{ post.comment_set.count }}评论 ·</a></span>
+                <span class="post-category">
+                    <a href="#">分类:{{ post.category.name }}    ·</a>
+                </span>
+                <span class="post-tag">
+                    <a href="#">标签:{{ tag.name }}    ·</a>
+                </span>
+                <span class="comments-link">
+                    <a href="#">{{ post.comment_set.count }}评论    ·</a>
+                </span>
                 <span class="views-count"><a href="#">{{ post.views }} 阅读</a></span>
             </div>
         </header>
