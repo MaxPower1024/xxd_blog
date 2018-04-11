@@ -13,6 +13,12 @@ class IndexView(ListView):
     context_object_name = 'post_list'
 
 
+class ArticleView(ListView):
+    model = Post
+    template_name = 'blog/article.html'
+    context_object_name = 'post_list'
+
+
 class PostDetailView(DeleteView):
     model = Post
     template_name = 'blog/detail.html'
@@ -36,8 +42,6 @@ class PostDetailView(DeleteView):
         return post
     
     def get_context_data(self, **kwargs):
-        # 覆写 get_context_data 的目的是因为除了将 post 传递给模板外（DetailView 已经帮我们完成），
-        # 还要把评论表单、post 下的评论列表传递给模板。
         context = super(PostDetailView, self).get_context_data(**kwargs)
         form = CommentForm()
         comment_list = self.object.comment_set.all()

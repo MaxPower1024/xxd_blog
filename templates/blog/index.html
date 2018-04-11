@@ -7,7 +7,6 @@
         <header>
             <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
             <div class="entry-meta">
-
                 <span class="post-date">
                     <a href="#">
                         <time class="entry-date" datetime="{{ post.created_time }}">{{ post.created_time }}    ·</time>
@@ -22,7 +21,8 @@
                 <span class="comments-link">
                     <a href="#">{{ post.comment_set.count }}评论    ·</a>
                 </span>
-                <span class="views-count"><a href="#">{{ post.views }} 阅读</a></span>
+                <span class="views-count"><a href="#">{{ post.views }} 阅读</a>
+                </span>
             </div>
         </header>
         <div class="body">
@@ -35,20 +35,14 @@
 {% empty %}
     <div class="no-post">暂无文章</div>
 {% endfor %}
-    <div class="pagination">
-        <ul>
-            <li><a href="">1</a></li>
-            <li><a href="">...</a></li>
-            <li><a href="">4</a></li>
-            <li><a href="">5</a></li>
-            <li class="current"><a href="">6</a></li>
-            <li><a href="">7</a></li>
-            <li><a href="">8</a></li>
-            <li><a href="">...</a></li>
-            <li><a href="">11</a></li>
-        </ul>
-    </div>
-
+        <div class="pagination">
+            <span class="disabled" title="首页">首页</span>
+            <span class="disabled" title="上一页">上一页</span>
+            <span class="current">1</span><span>2</span>
+            <span>3</span>
+            <span>下一页</span>
+            <span>尾页</span>
+        </div>
 {% endblock main %}
 
 
