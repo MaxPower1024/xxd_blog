@@ -31,7 +31,7 @@
 
                         <h3><i class="fa fa-comments"></i>Comments({{ post.comment_set.count }})</h3>
 
-                    <article class="comment">
+                        <article class="comment">
                             <ul class="comment-list list-unstyled">
                                 {% for comment in comment_list %}
                                     <li class="comment-item">
@@ -43,7 +43,7 @@
                                     暂无评论
                                 {% endfor %}
                             </ul>
-                    </article>
+                        </article>
 
                     </aside>
                     <aside class="create-comment" id="create-comment">
@@ -54,22 +54,29 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="{{ form.name.id_for_label }}">名字：</label>
+                                    <div style="width: 100%">
                                         {{ form.name }}
                                         {{ form.name.errors }}
                                     </div>
+
+                                </div>
                                 <div class="col-md-6">
                                     <label for="{{ form.email.id_for_label }}">邮箱：</label>
-                                    {{ form.email }}
-                                    {{ form.email.errors }}
+                                    <div style="width: 100%">
+                                        {{ form.email }}
+                                        {{ form.email.errors }}
+                                    </div>
                                 </div>
                                 <div class="col-md-12">
                                     <label for="{{ form.text.id_for_label }}">评论：</label>
+                                    <div style="width: 100%;">
                                         {{ form.text }}
                                         {{ form.text.errors }}
-                                        <button type="submit" class="btn btn-xlarge btn-clean-one">发表</button>
+                                    </div>
+                                    <button type="submit" class="btn btn-xlarge btn-clean-one">发表</button>
                                 </div>
                             </div>
-                              <!-- row -->
+                            <!-- row -->
                         </form>
                     </aside>
 

@@ -34,7 +34,7 @@ class Post(models.Model):
     # 正文
     body = models.TextField()
     # 创建时间
-    created_time = models.DateField()
+    created_time = models.DateTimeField()
     
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tag, blank=True)
