@@ -5,12 +5,14 @@ from comments.forms import CommentForm
 from django.views.generic import ListView, DeleteView
 from markdown.extensions.toc import TocExtension
 from django.utils.text import slugify
-
+from django.core.paginator import Paginator
 
 class IndexView(ListView):
     model = Post
     template_name = 'blog/index.html'
     context_object_name = 'post_list'
+    
+    paginate_by = 5
 
 
 class ArticleView(ListView):

@@ -76,23 +76,23 @@
                     <article class=" blog-teaser">
                     <header>
             <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-            <div class="entry-meta">
+            <div class="entry-meta" style="text-align: left;">
 
                 <span class="post-date">
-                    <a href="#">
+                    <a>
                         <time class="entry-date" datetime="{{ post.created_time }}">{{ post.created_time }}    ·</time>
                     </a>
                 </span>
                 <span class="post-category">
-                    <a href="#">分类:{{ post.category.name }}    ·</a>
+                    <a>分类:{{ post.category.name }}    ·</a>
                 </span>
                 <span class="post-tag">
-                    <a href="#">标签:{{ tag.name }}    ·</a>
+                    <a>标签:{{ tag.name }}    ·</a>
                 </span>
                 <span class="comments-link">
-                    <a href="#">{{ post.comment_set.count }}评论    ·</a>
+                    <a>{{ post.comment_set.count }}评论    ·</a>
                 </span>
-                <span class="views-count"><a href="#">{{ post.views }} 阅读</a></span>
+                <span class="views-count"><a>{{ post.views }} 阅读</a></span>
             </div>
         </header>
         <div class="body">
@@ -105,14 +105,7 @@
 {% empty %}
     <div class="no-post">暂无文章</div>
 {% endfor %}
-            <div class="pagination">
-            <span class="disabled" title="首页">首页</span>
-            <span class="disabled" title="上一页">上一页</span>
-            <span class="current">1</span><span>2</span>
-            <span>3</span>
-            <span>下一页</span>
-            <span>尾页</span>
-        </div>
+
             </main>
         </div>
     </div>
@@ -127,14 +120,14 @@
                 <div class="footer-widget">
                     <h3><i class="fa fa-user"></i>关于我</h3>
 
-                    <p>我的经验介绍</p>
+                    <p>每天充电的三好少年</p>
 
                 </div>
 
                 <div class="footer-widget">
                     <h3><i class="fa fa-envelope"></i>联系我</h3>
 
-                    <p>我的联系方式</p>
+                    <p>QQ:1363533757</p>
 
                     <div class="footer-widget-icon">
                         <i class="fa fa-facebook"></i><i class="fa fa-twitter"></i><i class="fa fa-google"></i>
@@ -145,8 +138,7 @@
         </div>
     </div>
     <div class="widewrapper copyright">
-        Copyright 2015 More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect
-        from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+        <a href="https://github.com/maxpower1024/" target="_blank">MAXPOWER</a>
     </div>
 </footer>
 

@@ -703,11 +703,7 @@ The tags widget
 /* ============
 The blog main page boxes 
 =============== */
-.blog-teaser {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    margin-bottom: 40px;
-}
+
 
 @media (min-width: 768px) and (max-width: 979px) {
     .blog-teaser {
@@ -717,8 +713,8 @@ The blog main page boxes
     }
 }
 
-.blog-teaser header {
-    text-align: center;
+.blog-teaser header{
+
 }
 
 .blog-teaser header img {
@@ -737,7 +733,7 @@ The blog main page boxes
 .blog-teaser header h3 a,
 .blog-teaser header h3 a:focus,
 .blog-teaser header h3 a:hover {
-    color: #454a4e;
+    color: #000000;
 }
 
 .blog-teaser header .meta {
@@ -751,7 +747,6 @@ The blog main page boxes
 
 .blog-teaser .body {
     padding-right: 25px;
-    padding-left: 25px;
     margin-bottom: 10px;
     color: #444;
 }
