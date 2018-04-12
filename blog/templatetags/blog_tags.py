@@ -42,7 +42,6 @@ def pagination(current_page, paginator, num_of_displaypages=10, num_of_backpages
         html = '''
             <li><a href="?page=1">1</a></la>
             <li class="disabled"><a href="?page=1">...</a></la>
-
         '''
         for i in range(current_page.number - num_of_frontpages, current_page.number + num_of_backpages + 1):
             html += '<li><a href="?page=%s">%s</a></la>' % (i, i)

@@ -1,62 +1,6 @@
-{% load staticfiles %}
+{% extends 'base_fuben.html' %}
 {% load blog_tags %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>jeshmin</title>
-
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-
-    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'blog/css/font-awesome/css/font-awesome.min.css' %}">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600|PT+Serif:400,400italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}" id="theme-styles">
-    <script src="{% static 'blog/js/vendor/google/html5-3.6-respond-1.1.0.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'blog/css/highlights/github.css' %}">
-
-</head>
-<body>
-<header>
-    <div class="widewrapper masthead">
-        <div class="container">
-            <a href="{% url 'blog:index' %}" id="logo">
-                <img src="{% static 'blog/img/logo.png' %}" alt="clean Blog">
-            </a>
-            <div class="clean-searchbox">
-                <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
-                    <input type="search" name="q" placeholder="search" required>
-                    <button type="submit">
-                        <span class="fa fa-search"></span>
-                    </button>
-                </form>
-
-            </div>
-            <nav>
-                <div class="nav">
-                    <ul class="nav nav-pills navbar-nav">
-                        <li>
-                            <a href="{% url 'blog:index' %}">首页</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'blog:article' %}">文章</a>
-                        </li>
-                        <li>
-                            <a href="#">赞助</a>
-                        </li>
-                        <li>
-                            <a href="#">联系</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-
-
-</header>
+{% block article %}
 
 <div class="widewrapper main">
     <div class="container">
@@ -96,7 +40,7 @@
             </div>
         </header>
         <div class="body">
-            {{ post.body|truncatechars:54 }}
+            {{ post.excerpt }}...
         </div>
         <div class="clearfix">
             <a href="{{ post.get_absolute_url }}" class="btn btn-clean-one">Read more</a>
@@ -105,52 +49,36 @@
 {% empty %}
     <div class="no-post">暂无文章</div>
 {% endfor %}
-{#                <nav>#}
-{#                    <ul class="pagination">#}
-{#                        {% pagination current_page paginator 12 5 as page_list %}#}
-{#                        {{ page_list|safe }}#}
-{#                    </ul>#}
-{#                </nav>#}
 
+            {% if is_paginated %}
+        <div class="pagination">
+        {% if first %}
+            <a href="?page=1">1</a>
+        {% endif %}
+        {% if left %}
+            {% if left_has_more %}
+                <span>...</span>
+            {% endif %}
+            {% for i in left %}
+                <a href="?page={{ i }}">{{ i }}</a>
+            {% endfor %}
+        {%endif %}
+        <a href="?page={{ page_obj.number }}" style="color: red">{{ page_obj.number }}</a>
+        {% if right %}
+            {% for i in right %}
+                <a href="?page={{ i }}">{{ i }}</a>
+            {% endfor %}
+            {% if right_has_more %}
+                <span>...</span>
+            {% endif %}
+        {% endif %}
+        {% if last %}
+            <a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
+        {% endif %}
+        </div>
+    {% endif %}
             </main>
         </div>
     </div>
 </div>
-
-<footer>
-    <div class="widewrapper footer">
-        <div class="container">
-
-            <div class="row" style="display: flex;
-                justify-content: space-between">
-                <div class="footer-widget">
-                    <h3><i class="fa fa-user"></i>关于我</h3>
-
-                    <p>每天充电的三好少年</p>
-
-                </div>
-
-                <div class="footer-widget">
-                    <h3><i class="fa fa-envelope"></i>联系我</h3>
-
-                    <p>QQ:1363533757</p>
-
-                    <div class="footer-widget-icon">
-                        <i class="fa fa-facebook"></i><i class="fa fa-twitter"></i><i class="fa fa-google"></i>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="widewrapper copyright">
-        <a href="https://github.com/maxpower1024/" target="_blank">MAXPOWER</a>
-    </div>
-</footer>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'blog/js/modernizr.js' %}"></script>
-
-</body>
-</html>
+{% endblock article %}

@@ -30,11 +30,6 @@
                 <img src="{% static 'blog/img/logo.png' %}" alt="clean Blog">
             </a>
             <div class="clean-searchbox">
-{#                <input class="searchfield" id="searchbox" type="search" name="q" placeholder="Search" action="{% url 'haystack_search' %}" >#}
-{#                <button class="searchbutton" type="submit">#}
-{#                    <i class="fa fa-search"></i>#}
-{#                </button>#}
-
                 <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
                     <input type="search" name="q" placeholder="search" required>
                     <button type="submit">
@@ -43,10 +38,6 @@
                 </form>
 
             </div>
-{#            <form role="search" method="get" id="searchbox" action="{% url 'haystack_search' %}">#}
-{#                <input type="search" name="q" placeholder="搜索" required>#}
-{#                <button type="submit"><span class="ion-ios-search-strong"></span></button>#}
-{#            </form>#}
 
             <nav>
                 <div class="nav">
@@ -56,6 +47,9 @@
                         </li>
                         <li>
                             <a href="{% url 'blog:article' %}">文章</a>
+                        </li>
+                        <li>
+                            <a href="#">归档</a>
                         </li>
                         <li>
                             <a href="#">赞助</a>
@@ -75,7 +69,7 @@
 <div class="widewrapper main">
     <div class="container">
         <div class="row">
-            <aside class="col-md-4 blog-aside">
+            <aside class="col-md-3 blog-aside">
                 {% block toc %}
                 {% endblock toc %}
                 <div class="aside-widget">
@@ -134,52 +128,29 @@
                 </div>
             </aside>
 
-            <main class="col-md-8 blog-main">
+            <main class="col-md-9 blog-main">
                 {% block main %}
                 {% endblock main %}
-
-{#            <nav>#}
-{#                <ul class="pagination">#}
-{#                    {% pagination current_page paginator 12 5 as page_list %}#}
-{#                    {{ page_list|safe }}#}
-{#                </ul>#}
-{#            </nav>#}
-
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                    {% block pagination %}
+                    {% endblock pagination %}
+                    </div>
+                </div>
             </main>
-            <aside class="col-md-4">
-
-            </aside>
 
         </div>
+{#        <div class="row">#}
+{#            <div class="col-md-6 col-md-offset-3">#}
+{#                {% block pagination %}#}
+{#                {% endblock pagination %}#}
+{#            </div>#}
+{#        </div>#}
+
     </div>
 </div>
 
 <footer>
-    <div class="widewrapper footer">
-        <div class="container">
-
-            <div class="row" style="display: flex;
-                justify-content: space-between">
-                <div class="footer-widget">
-                    <h3><i class="fa fa-user"></i>关于我</h3>
-
-                    <p>每天充电的三好少年</p>
-
-                </div>
-
-                <div class="footer-widget">
-                    <h3><i class="fa fa-envelope"></i>联系我</h3>
-
-                    <p>QQ:1363533757</p>
-
-                    <div class="footer-widget-icon">
-                        <i class="fa fa-facebook"></i><i class="fa fa-twitter"></i><i class="fa fa-google"></i>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
     <div class="widewrapper copyright">
         <a href="https://github.com/maxpower1024/" target="_blank">MAXPOWER</a>
     </div>

@@ -7,7 +7,7 @@ body {
 }
 
 a {
-    color: #5b6268;
+    color: #000000;
 }
 
 a:hover,
@@ -60,7 +60,7 @@ Font Awesome Icons
 }
 
 .masthead {
-    padding-top: 55px;
+    padding-top: 20px;
     padding-bottom: 55px;
 }
 
@@ -608,7 +608,7 @@ Blog styles
 }
 
 .blog-main {
-    padding-top: 36px;
+    /*padding-top: 36px;*/
     padding-bottom: 20px;
 }
 
@@ -623,7 +623,7 @@ Blog styles
 }
 
 .blog-aside {
-    padding-top: 36px;
+    /*padding-top: 36px;*/
 }
 
 @media (max-width: 767px) {
@@ -703,7 +703,6 @@ The tags widget
 The blog main page boxes 
 =============== */
 
-
 @media (min-width: 768px) and (max-width: 979px) {
     .blog-teaser {
         display: block;
@@ -712,7 +711,7 @@ The blog main page boxes
     }
 }
 
-.blog-teaser header{
+.blog-teaser header {
 
 }
 
@@ -1378,38 +1377,46 @@ fieldset[disabled] .btn-clean-two.active {
     border-radius: 0px;
 }
 
+
 .pagination {
+    margin-top: 25px;
     text-align: center;
-    font-size: 12px;
-    padding: 10px 0;
-    display: inline-block
 }
 
-.pagination a, .pagination span {
+.pagination a {
     display: inline-block;
-    padding: 0 10px;
-    height: 28px;
-    line-height: 28px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    text-decoration: none;
-    color: #222;
+    line-height: 38px;
+    padding: 0 15px;
+    margin-right: 4px;
+    text-align: center;
+    background-color: #fff;
+    user-select: none;
     cursor: pointer;
-    margin-right: 5px;
+    font-size: 14px;
+    border: 1px solid #d7dde4;
+    border-radius: 4px;
+    transition: all .2s ease-in-out;
 }
 
-.pagination a:hover:not(.disabled):not(.current), .pagination span:hover:not(.disabled):not(.current) {
-    color: #222
+.pagination a:hover {
+    color: #A161BF;
+    border: 1px solid #A161BF;
 }
 
-.pagination a.disabled, .pagination span.disabled {
-    color: #bfbfbf;
-    background: #f5f5f5;
-    cursor: no-drop;
-    border: 1px solid #ddd;
+.pagination .current-page {
+    color: white;
+    background-color: #A161BF;
 }
 
-.pagination a.current, .pagination span.current {
-    color: #fff;
-    background: #428bca;
+.pagination .current-page:hover {
+    color: white;
+    border: 1px solid #f1f1f1;
+}
+
+.pagination span {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 38px;
+    padding: 0 8px;
+    margin-right: 4px;
 }

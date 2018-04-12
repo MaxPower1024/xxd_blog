@@ -1,0 +1,80 @@
+{% load staticfiles %}
+{% load blog_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jeshmin</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/font-awesome/css/font-awesome.min.css' %}">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600|PT+Serif:400,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}" id="theme-styles">
+    <script src="{% static 'blog/js/vendor/google/html5-3.6-respond-1.1.0.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'blog/css/highlights/github.css' %}">
+
+</head>
+<body>
+<header>
+    <div class="widewrapper masthead">
+        <div class="container">
+            <a href="{% url 'blog:index' %}" id="logo">
+                <img src="{% static 'blog/img/logo.png' %}" alt="clean Blog">
+            </a>
+            <div class="clean-searchbox">
+                <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
+                    <input type="search" name="q" placeholder="search" required>
+                    <button type="submit">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </form>
+
+            </div>
+            <nav>
+                <div class="nav">
+                    <ul class="nav nav-pills navbar-nav">
+                        <li>
+                            <a href="{% url 'blog:index' %}">首页</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'blog:article' %}">文章</a>
+                        </li>
+                        <li>
+                            <a href="#">归档</a>
+                        </li>
+                        <li>
+                            <a href="#">赞助</a>
+                        </li>
+                        <li>
+                            <a href="#">联系</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+</header>
+{% block article %}
+{% endblock article %}
+
+
+<footer>
+    <div class="widewrapper footer">
+    </div>
+    <div class="widewrapper copyright">
+        <a href="https://github.com/maxpower1024/" target="_blank">MAXPOWER</a>
+    </div>
+</footer>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'blog/js/modernizr.js' %}"></script>
+
+</body>
+</html>
