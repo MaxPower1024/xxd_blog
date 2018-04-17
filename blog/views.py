@@ -2,12 +2,13 @@ from django.shortcuts import render, get_object_or_404
 from .models import Post, Category, Tag
 import markdown
 from comments.forms import CommentForm
-from django.views.generic import ListView, DeleteView
+from django.views.generic import ListView, DeleteView,TemplateView
 from markdown.extensions.toc import TocExtension
 from django.utils.text import slugify
 from django.core.paginator import Paginator
-
-
+from blogproject import settings
+import urllib
+from django.http import HttpResponseRedirect
 class IndexView(ListView):
     model = Post
     template_name = 'blog/index.html'
@@ -95,6 +96,7 @@ class ArticleView(ListView):
     template_name = 'blog/article.html'
     context_object_name = 'post_list'
 
+
 class PostDetailView(DeleteView):
     model = Post
     template_name = 'blog/detail.html'
@@ -146,3 +148,61 @@ class TagView(ListView):
     def get_queryset(self):
         tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
         return super(TagView, self).get_queryset().filter(tags=tag)
+
+
+# GITHUB_CLIENTID = settings.GITHUB_CLIENTID
+# GITHUB_CLIENTSECRET = settings.GITHUB_CLIENTSECRET
+# GITHUB_CALLBACK = settings.GITHUB_CALLBACK
+# GITHUB_AUTHORIZE_URL = settings.GITHUB_AUTHORIZE_URL
+#
+#
+# def __get_refer_url(request):
+#     refer_url = request.META.get('HTTP_REFER', '/index')
+#     host = request.META['HTTP_HOST']
+#     if refer_url.startwith('http') and host not in refer_url:
+#         refer_url = '/index'
+#     return refer_url
+#
+# #请求github第三方登陆
+# def github_login(requset):
+#     data = {
+#         'client_id': GITHUB_CLIENTID,
+#         'client_secret': GITHUB_CLIENTSECRET,
+#         'redirect_url': GITHUB_CALLBACK,
+#         'state': __get_refer_url(requset),
+#     }
+#     github_antu_url = '%s?%s' %(GITHUB_AUTHORIZE_URL,urllib.parse.urlencode(data))
+#     print('git_hub_auth_url',github_antu_url)
+#     return HttpResponseRedirect(github_antu_url)
+#
+# #github认证处理
+# def github_auth(request):
+#     template_html = 'account/login.html'
+#     #如果申请登录页面成功后，就会返回code和state
+#     if 'code' not in request.GET:
+#         return render(request,template_html)
+#     code = request.GET.get('code')
+#     #将得到的code，通过下面的url请求得到access——token
+#     url = 'https://github.com/logon/oauth/access_token'
+#     data = {
+#         'grant_type':'authorization_code',
+#         'client_id':GITHUB_CLIENTID,
+#         'client_secret':GITHUB_CLIENTSECRET,
+#         'code':code,
+#         'redirect_url':GITHUB_CALLBACK,
+#     }
+#     data = urllib.parse.urlencode(data)
+#     #请求参数需要bytes类型
+#     binary_data = data.encode('utf-8')
+#     print('data:',data)
+#     #设置请求返回的数据类型
+#     headers = {
+#         'Accept':'application/json'
+#     }
+#     req = urllib.request.Request(url,binary_data,headers)
+#     print('req',req)
+#     response = urllib.request.urlopen(req)
+#     #json是str类型的，将bytes转成str
+#     result = result.decode('ascii')
+#
+

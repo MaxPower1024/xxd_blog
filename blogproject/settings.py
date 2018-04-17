@@ -137,3 +137,9 @@ HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 STATIC_URL = '/static/'
+
+GITHUB_AUTHORIZE_URL = 'https://github.com/login/oauth/authorize'
+GITHUB_CLIENTID = 'client_id'
+GITHUB_CLIENTSECRET = 'client_secret'
+
+GITHUB_CALLBACK = 'http://localhost:8000/oauth/github/'
