@@ -34,12 +34,24 @@ class Post(models.Model):
     # 正文
     body = models.TextField()
     # 创建时间
-    created_time = models.DateField()
+    created_time = models.DateTimeField()
     
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tag, blank=True)
     
     views = models.PositiveIntegerField(default=0)
+    
+    excerpt = models.CharField(max_length=200,blank=True)
+    
+    def save(self, *args, **kwargs):
+        if not self.excerpt:
+            md = markdown.Markdown(extensions=[
+                'markdown.extensions.extra',
+                'markdown.extensions.codehilite',
+            ])
+            self.excerpt = strip_tags(md.convert(self.body))[:54]
+            
+        super(Post,self).save(*args,**kwargs)
     
     def increase_views(self):
         self.views += 1
@@ -54,10 +66,9 @@ class Post(models.Model):
     
     class Meta:
         ordering = ['-created_time']
-    
-    # def save(self, *args, **kwargs):
-    #     md = markdown.Markdown(extensions=[
-    #         'markdown.extensions.extra',
-    #         'markdown.extensions.codehilite',
-    #     ])
         
+        # def save(self, *args, **kwargs):
+        #     md = markdown.Markdown(extensions=[
+        #         'markdown.extensions.extra',
+        #         'markdown.extensions.codehilite',
+        #     ])
