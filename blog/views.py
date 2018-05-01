@@ -10,7 +10,7 @@ from django.core.paginator import Paginator
 
 class IndexView(ListView):
     model = Post
-    template_name = 'blog/index.html'
+    template_name = 'blog/index-fuben.html'
     context_object_name = 'post_list'
     
     paginate_by = 10
@@ -130,7 +130,7 @@ class PostDetailView(DeleteView):
 
 class CategoryView(ListView):
     model = Post
-    template_name = 'blog/index.html'
+    template_name = 'blog/index-fuben.html'
     context_object_name = 'post_list'
     
     def get_queryset(self):
@@ -140,7 +140,7 @@ class CategoryView(ListView):
 
 class TagView(ListView):
     model = Post
-    template_name = 'blog/index.html'
+    template_name = 'blog/index-fuben.html'
     context_object_name = 'post_list'
     
     def get_queryset(self):
