@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'blog',
     'comments',
     'haystack',
+    # 'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,8 @@ HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 STATIC_URL = '/static/'
+
+# MEDIA_ROOT = '/static/'#存放admin上传图片的路径
+# MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
