@@ -1,4 +1,4 @@
-{% extends 'base_datail.html' %}
+{% extends 'base.html' %}
 {% load staticfiles %}
 {% load blog_tags %}
 
@@ -9,7 +9,6 @@
 
 				<ol class="breadcrumb w_breadcrumb">
 				  <li><a href="{% url 'blog:index' %}">首页</a></li>
-{#				  <li><a href="#">文章</a></li>#}
 				  <li class="active">{{ post.title }}</li>
 				  <span class="w_navbar_tip">我们长路漫漫，只因学无止境。</span>
 				</ol>
@@ -22,7 +21,6 @@
                                 <span>分类:{{ post.category }}</span>
                                 <span>阅读:{{ post.views}}</span></p>
 							<ul class="infos">
-{#                                <p>之前服务器放在电信机房， 都问我的博客选得什么空间，一年的费用得多少钱，今天我列个表出来，供大家参考。</p>#}
                                 {{ post.body|safe }}
 							</ul>
 
