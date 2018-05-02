@@ -1,5 +1,6 @@
 {% extends 'base_datail.html' %}
 {% load staticfiles %}
+{% load blog_tags %}
 
 {% block article %}
 	<div class="w_container">
@@ -26,14 +27,13 @@
 							</ul>
 
 							<div class="keybq">
-						    	<p><span>关键字</span>：<a class="label label-default">个人博客</a><a class="label label-default">阿里云</a><a class="label label-default">空间</a></p>
-						    </div>
-
-
-
-							<div class="nextinfo">
-								<p class="last">上一篇：<a href="#">免费收录网站搜索引擎登录口大全</a></p>
-								<p class="next">下一篇：<a href="#">javascript显示年月日时间代码</a></p>
+                                {% get_tags as recent_tags %}
+						    	<p>
+                                    <span>标签:</span>
+                                    {% for tags in recent_tags %}
+                                    <a class="label label-default">{{ tags.name }}</a>
+                                    {% endfor %}
+                                </p>
 						    </div>
 
 						</div>
@@ -42,24 +42,12 @@
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<center><div id="cyReward" role="cylabs" data-use="reward" sid="5eab7e4c363e4cb8bed0efa3604e6b42"></div></center>
-							<!--<div id="cyEmoji" role="cylabs" data-use="emoji" sid="5eab7e4c363e4cb8bed0efa3604e6b42"></div>-->
 							<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
 							<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cysPwLFm1"></script>
 
 
-							<!--PC版-->
-							<!--<div id="SOHUCS" sid="5eab7e4c363e4cb8bed0efa3604e6b42"></div>
-							<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
-							<script type="text/javascript">
-							window.changyan.api.config({
-							appid: 'cysPwLFm1',
-							conf: 'prod_6c6350e206c502f569b865b4bf121e60'
-							});
-							</script>-->
-							<!-- 多说评论框 start -->
+
 								<div class="ds-thread" data-thread-key="testarticle" data-title="我的个人博客之——阿里云空间选择" data-url="http://127.0.0.1:8020/wilco/article_detail.html"></div>
-							<!-- 多说评论框 end -->
-							<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 							<script type="text/javascript">
 							var duoshuoQuery = {short_name:"wfyvv"};
 								(function() {
@@ -83,24 +71,21 @@
 					    <h3 class="panel-title">目录</h3>
 					  </div>
 					  <div class="panel-body">
-					    <div class="newContent">
-					    	<ul class="list-unstyled sidebar shiplink">
-{#								<li><a href="https://www.baidu.com/" target="_blank">百度</a></li>#}
-                                {{ post.toc|safe }}
-							</ul>
-					    </div>
+                          {{ post.toc|safe }}
 					  </div>
 					</div>
 					<div class="panel panel-default">
 					  <div class="panel-heading">
 					    <h3 class="panel-title">最新发布</h3>
+                          {% get_recent_posts as recent_post_list %}
 					  </div>
 					  <div class="panel-body">
 					    	<ul class="list-unstyled sidebar">
-								<li><a href="/post/04928311">排序算法之冒泡排序 － java实现</a></li>
-								<li><a href="/post/32097759">快速搭建基于二进制日志文件的 mysql 复制</a></li>
-								<li><a href="/post/09196557">web 服务器负载均衡教程，快速搭建高可用服务器集群</a></li>
-								<li><a href="/post/20654391">使用 redis 和 spring-session 实现 tomcat、glassfish 等 web 服务器集群 session 共享</a></li>
+                                {% for post in recent_post_list %}
+								<li>
+                                    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                </li>
+                                {% endfor %}
 						</ul>
 					  </div>
 					</div>
@@ -112,13 +97,10 @@
 		</div>
 	</div>
 
-	<!--toTop-->
 	<div id="shape">
 		<div class="shapeColor">
 			<div class="shapeFly">
 			</div>
 		</div>
 	</div>
-	<!--snow-->
-	<!--<div class="snow-container"></div>-->
 {% endblock article %}
