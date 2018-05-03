@@ -92,7 +92,7 @@ class IndexView(ListView):
 
 # class ArticleView(ListView):
 #     model = Post
-#     template_name = 'blog/article.html'
+#     template_name = 'blog/archives.html'
 #     context_object_name = 'post_list'
 
 class PostDetailView(DeleteView):
@@ -150,12 +150,12 @@ class TagView(ListView):
 
 class ArchivesView(ListView):
     model = Post
-    template_name = 'blog/article.html'
-    context_object_name = 'date_list'
-    
-    def get_queryset(self):
-        year = self.kwargs.get('year')
-        month = self.kwargs.get('month')
-        return super(ArchivesView, self).get_queryset().filter(created_time__year=year,
-                                                               created_time__month=month
-                                                               )
+    template_name = 'blog/archives.html'
+    context_object_name = 'post_list'
+
+    # def get_queryset(self):
+    #     year = self.kwargs.get('year')
+    #     month = self.kwargs.get('month')
+    #     return super(ArchivesView, self).get_queryset().filter(created_time__year=year,
+    #                                                            created_time__month=month
+    #                                                            )
