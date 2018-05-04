@@ -115,7 +115,6 @@ class PostDetailView(DeleteView):
         post.body = md.convert(post.body)
         post.toc = md.toc
         return post
-        
     
     def get_context_data(self, **kwargs):
         context = super(PostDetailView, self).get_context_data(**kwargs)
@@ -148,17 +147,17 @@ class TagView(ListView):
         return super(TagView, self).get_queryset().filter(tags=tag)
 
 
-# class ArchivesView(ListView):
-#     model = Post
-#     template_name = 'blog/archives.html'
-#     context_object_name = 'post_list'
+class archives(ListView):
+    model = Post
+    template_name = 'blog/archives.html'
+    context_object_name = 'dates'
     
     # def get_queryset(self):
     #     year = self.kwargs.get('year')
     #     month = self.kwargs.get('month')
-    #     return super(ArchivesView, self).get_queryset().filter(created_time__year=year,
-    #                                                            created_time__month=month
-    #                                                            )
-def archives(request):
-    dates = Post.objects.datetimes('created_time','month',order='DESC')
-    return render(request,'blog/archives.html',{'dates':dates})
+    #     return super(archives, self).get_queryset().filter(created_time__year=year,
+    #                                                        created_time__month=month
+    #                                                        )
+# def archives(request):
+#     dates = Post.objects.datetimes('created_time','day',order='DESC')
+#     return render(request,'blog/archives.html',{'dates':dates})
