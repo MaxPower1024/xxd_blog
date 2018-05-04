@@ -5,7 +5,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>jeshmin</title>
+		<title>maxpower</title>
 	</head>
 
 	<link href="{% static 'blog/plugin/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -13,6 +13,9 @@
 	<link href="{% static 'blog/logo.ico' %}" rel="shortcut icon" />
 	<script src="{% static 'blog/plugin/jquery.min.js' %}"></script>
 	<script src="{% static 'blog/plugin/bootstrap/js/bootstrap.min.js' %}"></script>
+	<!--<script type="text/javascript" src="plugin/jquery.page.js"></script>-->
+	<!--<script src="js/common.js"></script>-->
+	<!--<script src="js/snowy.js"></script>-->
 
 	<body>
         <div class="w_header">
@@ -20,9 +23,9 @@
 				<div class="w_header_top">
 					<span class="w_header_nav">
 					<ul>
-						<li><a href="{% url 'blog:index' %}">首页</a></li>
-						<li><a href="{% url 'blog:archives' %}">归档</a></li>
-						<li><a href="#">成长</a></li>
+						<li><a href="{% url 'blog:index' %}" class="active">首页</a></li>
+						<li><a href="#">归档</a></li>
+						<li><a href="article.html">成长</a></li>
 {#						<li><a href="">学习</a></li>#}
 {#						<li><a href="">娱乐</a></li>#}
 {#						<li><a href="moodList.html">说说</a></li>#}
@@ -40,10 +43,9 @@
 		</div>
         {% block article_all %}
         {% endblock article_all %}
-        {% block main %}
-        {% endblock main %}
         {% block article %}
         {% endblock article %}
+
         <div class="w_foot">
 			<div class="w_foot_copyright">www.jeshmin.com. All Rights Reserved. <span>|</span>
 				<a target="_blank" href="http://www.miitbeian.gov.cn/" rel="nofollow">浙ICP备18016390号-1</a>
@@ -56,7 +58,7 @@
 		});
 		var backToTopFun = function() {
 			var st = $(document).scrollTop(),
-				winh = $(window).height();
+				winh = $(window).height();µ
 			(st > 0) ? $backToTopEle.show(): $backToTopEle.hide();
 			/*IE6下的定位*/
 			if(!window.XMLHttpRequest) {

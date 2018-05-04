@@ -5,7 +5,6 @@ from comments.forms import CommentForm
 from django.views.generic import ListView, DeleteView
 from markdown.extensions.toc import TocExtension
 from django.utils.text import slugify
-from django.core.paginator import Paginator
 
 
 class IndexView(ListView):
@@ -13,7 +12,7 @@ class IndexView(ListView):
     template_name = 'blog/index.html'
     context_object_name = 'post_list'
     
-    paginate_by = 10
+    paginate_by = 6
     
     def get_context_data(self, **kwargs):
         # 得到父类生成的传递给模板的字典
@@ -90,10 +89,10 @@ class IndexView(ListView):
         return data
 
 
-class ArticleView(ListView):
-    model = Post
-    template_name = 'blog/article.html'
-    context_object_name = 'post_list'
+# class ArticleView(ListView):
+#     model = Post
+#     template_name = 'blog/archives.html'
+#     context_object_name = 'post_list'
 
 class PostDetailView(DeleteView):
     model = Post
@@ -111,7 +110,7 @@ class PostDetailView(DeleteView):
         md = markdown.Markdown(extensions=[
             'markdown.extensions.extra',
             'markdown.extensions.codehilite',
-            TocExtension(slugify=slugify)
+            TocExtension(slugify=slugify),
         ])
         post.body = md.convert(post.body)
         post.toc = md.toc
@@ -146,3 +145,19 @@ class TagView(ListView):
     def get_queryset(self):
         tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
         return super(TagView, self).get_queryset().filter(tags=tag)
+
+
+class archives(ListView):
+    model = Post
+    template_name = 'blog/archives.html'
+    context_object_name = 'dates'
+    
+    # def get_queryset(self):
+    #     year = self.kwargs.get('year')
+    #     month = self.kwargs.get('month')
+    #     return super(archives, self).get_queryset().filter(created_time__year=year,
+    #                                                        created_time__month=month
+    #                                                        )
+# def archives(request):
+#     dates = Post.objects.datetimes('created_time','day',order='DESC')
+#     return render(request,'blog/archives.html',{'dates':dates})

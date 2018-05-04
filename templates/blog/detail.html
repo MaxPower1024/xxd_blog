@@ -1,100 +1,104 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% load blog_tags %}
-{% block main %}
-    <article class=" blog-teaser">
-        <header>
-            <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-            <div class="entry-meta">
 
-                <span class="post-date">
-                    <a href="#">
-                        <time class="entry-date" datetime="{{ post.created_time }}">{{ post.created_time }} ·</time>
-                    </a>
-                </span>
-                <span class="post-category"><a href="#">分类:{{ post.category.name }}    ·</a></span>
-                <span class="post-tag"><a href="#">标签:{{ tags.name }}    ·</a></span>
-                <span class="comments-link"><a href="#">{{ post.comment_set.count }} 评论    ·</a></span>
-                <span class="views-count"><a href="#">{{ post.views }} 阅读</a></span>
-            </div>
-        </header>
-        <div class="body">
-            {{ post.body|safe }}
-        </div>
-    </article>
-    <div class="widewrapper main">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 blog-main">
+{% block article %}
+	<div class="w_container">
+		<div class="container">
+			<div class="row w_main_row">
 
-                    <aside class="comments" id="comments">
-                        <hr>
+				<ol class="breadcrumb w_breadcrumb">
+				  <li><a href="{% url 'blog:index' %}">首页</a></li>
+				  <li class="active">{{ post.title }}</li>
+				  <span class="w_navbar_tip">我们长路漫漫，只因学无止境。</span>
+				</ol>
 
-                        <h3><i class="fa fa-comments"></i>Comments({{ post.comment_set.count }})</h3>
+				<div class="col-lg-9 col-md-9 w_main_left">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h2 class="c_titile">{{ post.title }}</h2>
+							<p class="box_c"><span class="d_time">{{ post.created_time }}</span>
+                                <span>分类:{{ post.category }}</span>
+                                <span>阅读:{{ post.views}}</span></p>
+							<ul class="infos">
+                                {{ post.body|safe }}
+							</ul>
 
-                        <article class="comment">
-                            <ul class="comment-list list-unstyled">
-                                {% for comment in comment_list %}
-                                    <li class="comment-item">
-                                        <span class="nickname">{{ comment.name }}</span>
-                                        <time class="submit-date">{{ comment.created_time }}</time>
-                                        <div class="body">{{ comment.text }}</div>
-                                    </li>
-                                {% empty %}
-                                    暂无评论
+							<div class="keybq">
+                                {% get_tags as recent_tags %}
+						    	<p>
+                                    <span>标签:</span>
+                                    {% for tags in recent_tags %}
+                                    <a class="label label-default">{{ tags.name }}</a>
+                                    {% endfor %}
+                                </p>
+						    </div>
+
+						</div>
+					</div>
+
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<center><div id="cyReward" role="cylabs" data-use="reward" sid="5eab7e4c363e4cb8bed0efa3604e6b42"></div></center>
+							<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+							<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cysPwLFm1"></script>
+
+
+
+								<div class="ds-thread" data-thread-key="testarticle" data-title="我的个人博客之——阿里云空间选择" data-url="http://127.0.0.1:8020/wilco/article_detail.html"></div>
+							<script type="text/javascript">
+							var duoshuoQuery = {short_name:"wfyvv"};
+								(function() {
+									var ds = document.createElement('script');
+									ds.type = 'text/javascript';ds.async = true;
+									ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+									ds.charset = 'UTF-8';
+									(document.getElementsByTagName('head')[0]
+									 || document.getElementsByTagName('body')[0]).appendChild(ds);
+								})();
+								</script>
+							<!-- 多说公共JS代码 end -->
+
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 w_main_right">
+
+                    <div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">目录</h3>
+					  </div>
+					  <div class="panel-body">
+                          {{ post.toc|safe }}
+					  </div>
+					</div>
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">最新发布</h3>
+                          {% get_recent_posts as recent_post_list %}
+					  </div>
+					  <div class="panel-body">
+					    	<ul class="list-unstyled sidebar">
+                                {% for post in recent_post_list %}
+								<li>
+                                    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                </li>
                                 {% endfor %}
-                            </ul>
-                        </article>
+						</ul>
+					  </div>
+					</div>
 
-                    </aside>
-                    <aside class="create-comment" id="create-comment">
-                        <hr>
-                        <h3><i class="fa fa-pencil"></i>发表评论</h3>
-                        <form action="{% url 'comments:post_comment' post.pk %}" method="post" class="comment-form">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="{{ form.name.id_for_label }}">名字：</label>
-                                    <div style="width: 100%">
-                                        {{ form.name }}
-                                        {{ form.name.errors }}
-                                    </div>
+				</div>
 
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="{{ form.email.id_for_label }}">邮箱：</label>
-                                    <div style="width: 100%">
-                                        {{ form.email }}
-                                        {{ form.email.errors }}
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="{{ form.text.id_for_label }}">评论：</label>
-                                    <div style="width: 100%;">
-                                        {{ form.text }}
-                                        {{ form.text.errors }}
-                                    </div>
-                                    <button type="submit" class="btn btn-xlarge btn-clean-one">发表</button>
-                                </div>
-                            </div>
-                            <!-- row -->
-                        </form>
-                    </aside>
 
-                </div>
+			</div>
+		</div>
+	</div>
 
-            </div>
-        </div>
-    </div>
-{% endblock main %}
-{% block toc %}
-    <div class="aside-widget">
-        <header>
-            <h3>目录</h3>
-        </header>
-        <div class="body">
-            <ul class="clean-list">
-                {{ post.toc|safe }}
-            </ul>
-        </div>
-    </div>
-{% endblock toc %}
+	<div id="shape">
+		<div class="shapeColor">
+			<div class="shapeFly">
+			</div>
+		</div>
+	</div>
+{% endblock article %}

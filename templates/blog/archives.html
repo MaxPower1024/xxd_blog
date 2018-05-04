@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load blog_tags %}
+
+
+{% block article_all %}
+    <div class="w_container">
+        <div class="container">
+            <div class="row w_main_row">
+                <ol class="breadcrumb w_breadcrumb">
+                    {#                    <li><a href="{% url 'blog:archives' %}">归档</a></li>#}
+                    <li>归档时间轴</li>
+                    <span class="w_navbar_tip">删删写写，回回忆忆，虽无法行云流水，却也可碎言碎语</span>
+                </ol>
+                <div class="bloglist">
+                    {#                    {% regroup dates by year as dates_by_year %}#}
+                    {#                    <ul class="arrow_box">#}
+                    {#                        {% for month in dates_by_year %}#}
+                    {#                            <li>{{ month.grouper }} 年#}
+                    {#                                <ul class="mt-3">#}
+                    {#                                    {% for d in month.list %}#}
+                    {#                                        <li class="mt-3">{{ d|date:'m' }} 月#}
+                    {#                                        <li class="mt-3"><a href="#">1111</a>#}
+                    {#                                        </li>#}
+                    {#                                    {% endfor %}#}
+                    {#                                </ul>#}
+                    {#                            </li>#}
+                    {#                        {% empty %}#}
+                    {#                            暂无归档#}
+                    {#                        {% endfor %}#}
+                    {#                    </ul>#}
+
+                    {% regroup dates by created_time.year as year_post_group %}
+
+                    <ul>
+                        {% for year in year_post_group %}
+                            <li>{{ year.grouper }} 年
+                                {% regroup year.list by created_time.month as month_post_group %}
+                                <ul>
+                                    {% for month in month_post_group %}
+                                        <li>{{ month.grouper }} 月
+                                            <ul>
+                                                {% for post in month.list %}
+                                                    <li>
+                                                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+{#                    {% regroup dates by created_time.year as posts_by_year %}#}
+{#                    <ul>#}
+{#                        {% for year in posts_by_year %}#}
+{#                            <li>{{ year.grouper }}年#}
+{#                                {% regroup year.list by created_time.month as posts_by_month %}#}
+{#                                <ul>#}
+{#                                    {% for month in posts_by_month %}#}
+{#                                        <li id="#}
+{#                                                #}
+{#                                                {{ year.grouper }}{{ month.grouper|stringformat:'02d' }}">{{ month.grouper }}月#}
+{#                                            <ul>#}
+{#                                                {% for post in month.list %}#}
+{#                                                    <li>{{ post.created_time.day }}#}
+{#                                                        <a href="{{ post.get_absolute_url }}"#}
+{#                                                                class="uk-link-reset uk-button-text">{{ post.title }}</a>#}
+{#                                                    </li>#}
+{#                                                {% endfor %}#}
+{#                                            </ul>#}
+{#                                        </li>#}
+{#                                    {% endfor %}#}
+{#                                </ul>#}
+{#                            </li>#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="shape">
+        <div class="shapeColor">
+            <div class="shapeFly">
+            </div>
+        </div>
+    </div>
+{% endblock article_all %}

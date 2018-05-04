@@ -6,7 +6,6 @@ from django.urls import reverse
 import markdown
 from django.utils.html import strip_tags
 
-
 # 分类
 @python_2_unicode_compatible
 class Category(models.Model):
@@ -30,6 +29,8 @@ class Tag(models.Model):
 class Post(models.Model):
     # 标题
     title = models.CharField(max_length=100)
+    # img
+    # photo = models.ImageField(u'图片', upload_to='')  # 路径为空，表示让django自己选择settings.py中设置的路径
     
     # 正文
     body = models.TextField()
@@ -41,7 +42,7 @@ class Post(models.Model):
     
     views = models.PositiveIntegerField(default=0)
     
-    excerpt = models.CharField(max_length=200,blank=True)
+    excerpt = models.CharField(max_length=200, blank=True)
     
     def save(self, *args, **kwargs):
         if not self.excerpt:
@@ -50,8 +51,8 @@ class Post(models.Model):
                 'markdown.extensions.codehilite',
             ])
             self.excerpt = strip_tags(md.convert(self.body))[:54]
-            
-        super(Post,self).save(*args,**kwargs)
+        
+        super(Post, self).save(*args, **kwargs)
     
     def increase_views(self):
         self.views += 1

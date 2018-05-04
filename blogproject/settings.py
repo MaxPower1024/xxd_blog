@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'blog',
     'comments',
     'haystack',
+    # 'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,7 @@ WSGI_APPLICATION = 'blogproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME' : 'xiangxiaodong_blog',#数据库名称
+        'NAME' : 'xiangxiaodong',#数据库名称
         'USER' : 'root',#数据库的用户名
         'PASSWORD' : 'root',#数据库密码
         'HOST' : '127.0.0.1',#数据库主机，默认留空为localhost
@@ -137,3 +138,8 @@ HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 STATIC_URL = '/static/'
+
+# MEDIA_ROOT = '/static/'#存放admin上传图片的路径
+# MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

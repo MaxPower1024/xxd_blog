@@ -56,3 +56,8 @@ def pagination(current_page, paginator, num_of_displaypages=10, num_of_backpages
         for i in range(paginator.num_pages - num_of_backpages - num_of_frontpages, paginator.num_pages + 1):
             html += '<li><a href="?page=%s">%s</a></la>' % (i, i)
         return html
+
+
+@register.assignment_tag
+def archives():
+    return Post.objects.dates('created_time', 'month', order='DESC')
